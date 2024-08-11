@@ -67,7 +67,7 @@ This project makes use of the following technologies and resources:
 - Clone the repository
 
   ```
-
+  git clone git@github.com:SumirVats2003/ZenithStudio.git
   ```
 
 - Install frontend(run the commands from the root directory of this repository)
