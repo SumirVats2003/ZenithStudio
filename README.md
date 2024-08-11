@@ -75,6 +75,7 @@ This project makes use of the following technologies and resources:
   ```
   cd frontend
   npm install
+  npm run dev
   ```
 
   Then, download the [frontend/.env](https://drive.google.com/drive/folders/1p1Ll5GGVPR-ykc3_NyGJjrdjBeF3flmD?usp=sharing) and place it in the `frontend` directory
