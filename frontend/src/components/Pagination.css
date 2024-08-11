@@ -1,0 +1,27 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #282c34;
+  color: #ffffff;
+  border: 1px solid #444;
+  padding: 8px 12px;
+  margin: 0 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:hover {
+  background-color: #3e4451;
+  color: #61afef;
+}
+
+.pagination button.active {
+  color: #3e4451;
+  background-color: #61afef;
+}

@@ -1,0 +1,90 @@
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
+import './Auth.css'
+
+const LoginPage = ({ setIsAuthenticated }) => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  })
+
+  const navigate = useNavigate()
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        },
+      )
+      const data = await response.json()
+
+      if (data.success) {
+        setIsAuthenticated(true)
+
+        localStorage.setItem('authToken', data.username)
+
+        navigate('/home')
+      } else {
+        alert('Login failed. Please check your username and password.')
+      }
+    } catch (error) {
+      console.error('Error logging in:', error)
+      alert('An error occurred during login.')
+    }
+  }
+
+  return (
+    <>
+      <Navbar pgvisible={true} bgvisible={true} arvisible={true} />
+      <div className='auth-container'>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Username:
+            <input
+              type='text'
+              name='username'
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type='password'
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <button type='submit'>Login</button>
+          <p>
+            New User? <Link to='/register'>Register</Link>
+          </p>
+        </form>
+      </div>
+    </>
+  )
+}
+
+export default LoginPage
